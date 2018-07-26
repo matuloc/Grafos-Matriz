@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1532646334 source:c:\users\micl_\desktop\proyectos\c++\matriz\main.cpp
+	<iostream>
+	<math.h>
+
