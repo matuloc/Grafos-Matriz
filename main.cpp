@@ -142,9 +142,8 @@ int main()
             }
             cout<<endl;
         }
-        //LLenar Matriz para saber si es conexa
+        //Mostrar Matriz para saber si es conexa
         cout<<"Matriz Conexa"<<endl;
-        //Mostrar Matriz
         for(int i=0;i<matriz;i++)
         {
             for(int j=0;j<matriz;j++)
