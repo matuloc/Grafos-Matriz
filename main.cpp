@@ -119,7 +119,7 @@ int main()
                         {
                             for (int k=0;k<matriz;k++)
                             {
-                            grafo2[i][j]+= grafo[i][k]*grafo2[k][j];
+                                grafo2[i][j]+= grafo[i][k]*grafo2[k][j];
                             }
                         }
                     }
