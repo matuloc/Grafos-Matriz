@@ -127,7 +127,7 @@ int main()
                     {
                         for(int j=0;j<matriz;j++)
                         {
-                            grafo_conexo[i][j]= grafo2[i][j]+cero[i][j];
+                            grafo_conexo[i][j]= grafo2[i][j]+grafo_conexo[i][j];
                         }
                     }
                 }
