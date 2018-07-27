@@ -12,6 +12,7 @@ int main()
     do
     {
         system("cls");
+        cout<<"Grafos - Matriz Conexo \n"<<endl;
         cout<<"1) Llenar matriz"<<endl;
         cout<<"2) Salir"<<endl;
         cin>>opcion;
