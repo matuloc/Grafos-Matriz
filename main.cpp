@@ -1,3 +1,6 @@
+/*
+ * @author Matulo
+ */
 #include <iostream>
 
 using namespace std;
