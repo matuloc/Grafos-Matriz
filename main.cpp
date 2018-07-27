@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-    int matriz,grafo[100][100],grafo2[100][100],cero[100][100],elevada[100][100],conexo[100][100],a,contador=0;
+    int matriz,grafo[100][100],grafo2[100][100],cero[100][100],grafo_conexo[100][100],conexo=0,coeficiente;
     cout<<"Ingrese tamaño de la matriz: "<<endl;
     cin>>matriz;
     //LLenar Matriz
@@ -16,6 +16,7 @@ int main()
             cout<<"Ingrese Numero ["<<i<<"]["<<j<<"] :";
             cin>>grafo[i][j];
             grafo2[i][j]=grafo[i][j];
+            grafo_conexo[i][j]=grafo[i][j];
         }
     }
     //Mostrar Matriz
@@ -54,8 +55,8 @@ int main()
     }
     //Matriz elevada
     cout<<"Indique el coeficiente para elevar la matriz:";
-    cin>>a;
-    if(a==0)
+    cin>>coeficiente;
+    if(coeficiente==0)
     {
         //Mostrar Matriz elevada a 0
         cout<<"Matriz elevada a 0"<<endl;
@@ -68,74 +69,101 @@ int main()
             cout<<endl;
         }
     }
-    if(a==1)
-    {
-        //mostrar matriz normal
-        cout<<"Matriz formada"<<endl;
-        for(int i=0;i<matriz;i++)
-        {
-            for(int j=0;j<matriz;j++)
-            {
-                cout<<grafo[i][j];
-            }
-            cout<<endl;
-        }
-    }
     else
     {
         //LLenar Matriz elevada a n
-        for(int rep=0;rep<a;rep++)
+        for(int contador=0;contador<coeficiente;contador++)
         {
-            for(int i=0;i<matriz;i++)
-            {
-                for(int j=0;j<matriz;j++)
+            if(contador==0)
                 {
-                    for(int k=0;k<matriz;k++)
+                    for(int i=0;i<matriz;i++)
                     {
-                        elevada[i][j]+=grafo2[i][k]*grafo[k][j];
+                        for(int j=0;j<matriz;j++)
+                        {
+                            grafo2[i][j]=grafo[i][j];
+                        }
+                    }
+                    for(int i=0;i<matriz;i++)
+                    {
+                        for(int j=0;j<matriz;j++)
+                        {
+                            grafo_conexo[i][j]= grafo2[i][j]+cero[i][j];
+                        }
                     }
                 }
-            }
+                else if(contador==1)
+                {
+                    for(int i=0;i<matriz;i++)
+                    {
+                        for(int j=0;j<matriz;j++)
+                        {
+                            for (int k=0;k<matriz;k++)
+                            {
+                            grafo2[i][j]+= grafo[i][k]*grafo[k][j];
+                            }
+                        }
+                    }
+                    for(int i=0;i<matriz;i++)
+                    {
+                        for(int j=0;j<matriz;j++)
+                        {
+                            grafo_conexo[i][j]= grafo2[i][j]+grafo_conexo[i][j];
+                        }
+                    }
+                }
+                else if(contador>=2)
+                {
+                    for(int i=0;i<matriz;i++)
+                    {
+                        for(int j=0;j<matriz;j++)
+                        {
+                            for (int k=0;k<matriz;k++)
+                            {
+                            grafo2[i][j]+= grafo[i][k]*grafo2[k][j];
+                            }
+                        }
+                    }
+                    for(int i=0;i<matriz;i++)
+                    {
+                        for(int j=0;j<matriz;j++)
+                        {
+                            grafo_conexo[i][j]= grafo2[i][j]+cero[i][j];
+                        }
+                    }
+                }
         }
         //mostrar matriz elevada a n
-        cout<<"Matriz elevada"<<endl;
+        cout<<"Matriz elevada a "<<coeficiente<<endl;
         for(int i=0;i<matriz;i++)
         {
             for(int j=0;j<matriz;j++)
             {
-                cout<<elevada[i][j];
+                cout<<grafo2[i][j];
             }
             cout<<endl;
         }
-    }
-    //LLenar Matriz para saber si es conexa
-    cout<<"Matriz Conexa"<<endl;
-    for(int i=0;i<matriz;i++)
-    {
-        for(int j=0;j<matriz;j++)
+        //LLenar Matriz para saber si es conexa
+        cout<<"Matriz Conexa"<<endl;
+        //Mostrar Matriz
+        for(int i=0;i<matriz;i++)
         {
-            conexo[i][j]=elevada[i][j]+cero[i][j]+grafo[i][j];
-            if(conexo[i][j]==0)
+            for(int j=0;j<matriz;j++)
             {
-                contador++;
+                cout<<grafo_conexo[i][j];
+                if(grafo_conexo[i][j]==0)
+                {
+                    conexo++;
+                }
             }
+            cout<<endl;
         }
-    }
-    //Mostrar Matriz
-    for(int i=0;i<matriz;i++)
-    {
-        for(int j=0;j<matriz;j++)
+        if(conexo==0)
         {
-            cout<<conexo[i][j];
+            cout<<"La matriz es conexo"<<endl;
         }
-        cout<<endl;
-    }
-    if(contador==0)
-    {
-        cout<<"Es Conexo"<<endl;
-    }
-    else
-    {
-        cout<<"No es conexo ya que no todos sus coeficientes son distintos de 0"<<endl;
+        else
+        {
+            cout<<"La Matriz no es conexo"<<endl;
+        }
     }
 }
